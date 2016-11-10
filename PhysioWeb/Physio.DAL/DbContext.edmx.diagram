@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e1abcf616a6743c8a3a1dc19eb441393" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="PhysioWebModel.GenderType" Width="1.5" PointX="11.375" PointY="4.625" />
+        <EntityTypeShape EntityType="PhysioWebModel.Patient" Width="1.5" PointX="9.875" PointY="1.25" />
+        <EntityTypeShape EntityType="PhysioWebModel.PatientAnswer" Width="1.5" PointX="7.25" PointY="1.25" />
+        <EntityTypeShape EntityType="PhysioWebModel.PatientQuestionnaire" Width="2.125" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="PhysioWebModel.Question" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PhysioWebModel.QuestionSet" Width="2" PointX="0.5" PointY="4.25" />
+        <EntityTypeShape EntityType="PhysioWebModel.QuestionSetQuestion" Width="2.125" PointX="4.125" PointY="2.75" />
+        <EntityTypeShape EntityType="PhysioWebModel.QuestionType" Width="1.5" PointX="6.125" PointY="6.375" />
+        <AssociationConnector Association="PhysioWebModel.FK_Patient_GenderType" />
+        <AssociationConnector Association="PhysioWebModel.FK_PatientAnswer_Patient" />
+        <AssociationConnector Association="PhysioWebModel.FK_PatientQuestionnaire_Patient" />
+        <AssociationConnector Association="PhysioWebModel.FK_PatientAnswer_PatientQuestionnaire" />
+        <AssociationConnector Association="PhysioWebModel.FK_PatientAnswer_Question" />
+        <AssociationConnector Association="PhysioWebModel.FK_PatientQuestionnaire_QuestionSet" />
+        <AssociationConnector Association="PhysioWebModel.FK_Question_QuestionType" />
+        <AssociationConnector Association="PhysioWebModel.FK_QuestionSetQuestion_Question" />
+        <AssociationConnector Association="PhysioWebModel.FK_QuestionSetQuestion_QuestionSet" />
+        <EntityTypeShape EntityType="PhysioWebModel.vwPatientQuestionnaire" Width="2" PointX="13.75" PointY="1" />
+        <EntityTypeShape EntityType="PhysioWebModel.vwPatientChartData" Width="2.375" PointX="13.75" PointY="5.25" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

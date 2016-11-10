@@ -1,0 +1,63 @@
+﻿@using PhysioQA.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    @Styles.Render("~/bundles/font-awesome")
+    @Styles.Render("~/bundles/css")
+    
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+           
+            <h3>Welcome to Physio Web</h3>
+            <p>Login in.</p>
+            
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "m-t", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                <p>
+                    <a href="ForgotPassword"><small>Forgot password?</small></a>
+                </p>
+                
+                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+                <span>@Html.ActionLink("Create an account", "Register", new { @class = "btn btn-sm btn-white btn-block" })</span>
+            }
+            <p class="m-t"> <small>Company name &copy; 2016</small> </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+
+
