@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Patient Questions";
+}
+
+
+@section Styles {
+
+    @Styles.Render("~/bundles/ionRangeStyles")
+    @Styles.Render("~/bundles/sweetAlertStyles")
+
+    @*@Styles.Render("~/bundles/nouiSliderStyles")*@
+
+}
+
+
+<div class="wrapper wrapper-content">
+    @*<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins border-bottom">
+                <div class="ibox-title">
+                    <h5>New Patient Questionnaire</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Question set: Default</a>
+                            </li>
+                            <li>
+                                <a href="#">Question set: Serious Injury</a>
+                            </li>
+                            <li>
+                                <a href="#">Question set: Sports Injury</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <h2>
+                        Please select question set and select start button to start your questions.<br>
+                    </h2>
+                    <p>
+                        <strong>Lorem ipsum dolor</strong>
+                        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                    </p>
+                    <p>
+                        <small>
+                            Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+                        </small>
+                    </p>
+                </div>
+                <div class="ibox-footer">
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-primary">
+                            Start New Questionnaire
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div id="animation_box" class="animated">
+                <div class="ibox float-e-margins border-bottom" id="question-view" data-bind="with: CurrentQuestion">
+                    <div class="ibox-title">
+                        <h5>Question <span data-bind="text: $root.QuestionNumber"></span></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h4 class="m-b-lg" data-bind="text: QuestionText"></h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="slider-container-outer">
+                            <div id="slider-container-inner">
+                                @* <input type="text" id="ir-slider" name="my-slider" value="" />*@
+                                @*<div id="noui-slider"></div>*@
+                                <div id="ir-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" data-bind="click: $root.SubmitQuestion, clickBubble: false">Submit Answer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+        </div>
+</div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/sweetAlert")
+
+    @Scripts.Render("~/bundles/ionRange")
+    
+    @*@Scripts.Render("~/bundles/nouislider")*@
+    @Scripts.Render("~/bundles/knockout")
+
+    <script src="~/Scripts/ko/Questions.js"></script>
+
+}
+

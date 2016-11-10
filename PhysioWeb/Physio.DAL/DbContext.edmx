@@ -1,0 +1,848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PhysioWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GenderType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="3" />
+          <Property Name="Description" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="DoB" Type="date" />
+          <Property Name="GenderTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="QuestionnaireId" Type="int" Nullable="false" />
+          <Property Name="Answer" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientQuestionnaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionSetId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="QuestionnaireDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="QuestionTitle" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="QuestionTypeId" Type="int" />
+          <Property Name="QuestionAbbreviation" Type="varchar" MaxLength="50" />
+          <Property Name="QuestionHint" Type="varchar" MaxLength="20" />
+          <Property Name="UIcaption" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="QuestionSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="QuestionSetName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionSetQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionSetId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PhysioWeb.dbo.vwPatientChartData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPatientChartData">
+          <Key>
+            <PropertyRef Name="Answer" />
+            <PropertyRef Name="PatientId" />
+            <PropertyRef Name="PatientQuestionnaireId" />
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="QuestionnaireDate" />
+          </Key>
+          <Property Name="QuestionAbbreviation" Type="varchar" MaxLength="50" />
+          <Property Name="Answer" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="PatientQuestionnaireId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="QuestionnaireDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PhysioWeb.dbo.vwPatientQuestionnaire' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPatientQuestionnaire">
+          <Key>
+            <PropertyRef Name="PatientId" />
+            <PropertyRef Name="QuestionSetId" />
+            <PropertyRef Name="PatientQuestionnaireId" />
+            <PropertyRef Name="QuestionnaireDate" />
+            <PropertyRef Name="QuestionSetName" />
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="QuestionTitle" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="PatientName" Type="varchar" MaxLength="102" />
+          <Property Name="QuestionSetId" Type="int" Nullable="false" />
+          <Property Name="PatientQuestionnaireId" Type="int" Nullable="false" />
+          <Property Name="QuestionnaireDate" Type="date" Nullable="false" />
+          <Property Name="QuestionSetName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="QuestionTitle" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="QuestionAbbreviation" Type="varchar" MaxLength="50" />
+          <Property Name="QuestionHint" Type="varchar" MaxLength="20" />
+          <Property Name="UIcaption" Type="varchar" MaxLength="20" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Answer" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_Patient_GenderType">
+          <End Role="GenderType" Type="Self.GenderType" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="GenderTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientAnswer_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientAnswer" Type="Self.PatientAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientAnswer">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientAnswer_PatientQuestionnaire">
+          <End Role="PatientQuestionnaire" Type="Self.PatientQuestionnaire" Multiplicity="1" />
+          <End Role="PatientAnswer" Type="Self.PatientAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientQuestionnaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientAnswer">
+              <PropertyRef Name="QuestionnaireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientAnswer_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="PatientAnswer" Type="Self.PatientAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientAnswer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientQuestionnaire_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientQuestionnaire" Type="Self.PatientQuestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientQuestionnaire">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientQuestionnaire_QuestionSet">
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="1" />
+          <End Role="PatientQuestionnaire" Type="Self.PatientQuestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientQuestionnaire">
+              <PropertyRef Name="QuestionSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_QuestionType">
+          <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="0..1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuestionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionSetQuestion_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionSetQuestion" Type="Self.QuestionSetQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionSetQuestion">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionSetQuestion_QuestionSet">
+          <End Role="QuestionSet" Type="Self.QuestionSet" Multiplicity="1" />
+          <End Role="QuestionSetQuestion" Type="Self.QuestionSetQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionSetQuestion">
+              <PropertyRef Name="QuestionSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspChartPivot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PatientId" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="uspTempInsertPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="DoB" Type="date" Mode="In" />
+          <Parameter Name="Gender" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PhysioWebModelStoreContainer">
+          <EntitySet Name="GenderType" EntityType="Self.GenderType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientAnswer" EntityType="Self.PatientAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientQuestionnaire" EntityType="Self.PatientQuestionnaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionSet" EntityType="Self.QuestionSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionSetQuestion" EntityType="Self.QuestionSetQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwPatientChartData" EntityType="Self.vwPatientChartData" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwPatientChartData].[QuestionAbbreviation] AS [QuestionAbbreviation], 
+    [vwPatientChartData].[Answer] AS [Answer], 
+    [vwPatientChartData].[PatientId] AS [PatientId], 
+    [vwPatientChartData].[PatientQuestionnaireId] AS [PatientQuestionnaireId], 
+    [vwPatientChartData].[QuestionId] AS [QuestionId], 
+    [vwPatientChartData].[QuestionnaireDate] AS [QuestionnaireDate]
+    FROM [dbo].[vwPatientChartData] AS [vwPatientChartData]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwPatientQuestionnaire" EntityType="Self.vwPatientQuestionnaire" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwPatientQuestionnaire].[PatientId] AS [PatientId], 
+    [vwPatientQuestionnaire].[PatientName] AS [PatientName], 
+    [vwPatientQuestionnaire].[QuestionSetId] AS [QuestionSetId], 
+    [vwPatientQuestionnaire].[PatientQuestionnaireId] AS [PatientQuestionnaireId], 
+    [vwPatientQuestionnaire].[QuestionnaireDate] AS [QuestionnaireDate], 
+    [vwPatientQuestionnaire].[QuestionSetName] AS [QuestionSetName], 
+    [vwPatientQuestionnaire].[QuestionId] AS [QuestionId], 
+    [vwPatientQuestionnaire].[QuestionTitle] AS [QuestionTitle], 
+    [vwPatientQuestionnaire].[QuestionAbbreviation] AS [QuestionAbbreviation], 
+    [vwPatientQuestionnaire].[QuestionHint] AS [QuestionHint], 
+    [vwPatientQuestionnaire].[UIcaption] AS [UIcaption], 
+    [vwPatientQuestionnaire].[Description] AS [Description], 
+    [vwPatientQuestionnaire].[Answer] AS [Answer]
+    FROM [dbo].[vwPatientQuestionnaire] AS [vwPatientQuestionnaire]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Patient_GenderType" Association="Self.FK_Patient_GenderType">
+            <End Role="GenderType" EntitySet="GenderType" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientAnswer_Patient" Association="Self.FK_PatientAnswer_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientAnswer" EntitySet="PatientAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientAnswer_PatientQuestionnaire" Association="Self.FK_PatientAnswer_PatientQuestionnaire">
+            <End Role="PatientQuestionnaire" EntitySet="PatientQuestionnaire" />
+            <End Role="PatientAnswer" EntitySet="PatientAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientAnswer_Question" Association="Self.FK_PatientAnswer_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="PatientAnswer" EntitySet="PatientAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientQuestionnaire_Patient" Association="Self.FK_PatientQuestionnaire_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientQuestionnaire" EntitySet="PatientQuestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientQuestionnaire_QuestionSet" Association="Self.FK_PatientQuestionnaire_QuestionSet">
+            <End Role="QuestionSet" EntitySet="QuestionSet" />
+            <End Role="PatientQuestionnaire" EntitySet="PatientQuestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_QuestionType" Association="Self.FK_Question_QuestionType">
+            <End Role="QuestionType" EntitySet="QuestionType" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionSetQuestion_Question" Association="Self.FK_QuestionSetQuestion_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="QuestionSetQuestion" EntitySet="QuestionSetQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionSetQuestion_QuestionSet" Association="Self.FK_QuestionSetQuestion_QuestionSet">
+            <End Role="QuestionSet" EntitySet="QuestionSet" />
+            <End Role="QuestionSetQuestion" EntitySet="QuestionSetQuestion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PhysioWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PhysioWebEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="uspTempInsertPatient">
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="DoB" Mode="In" Type="DateTime" />
+            <Parameter Name="Gender" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="GenderTypes" EntityType="PhysioWebModel.GenderType" />
+          <EntitySet Name="Patients" EntityType="PhysioWebModel.Patient" />
+          <EntitySet Name="PatientAnswers" EntityType="PhysioWebModel.PatientAnswer" />
+          <EntitySet Name="PatientQuestionnaires" EntityType="PhysioWebModel.PatientQuestionnaire" />
+          <EntitySet Name="Questions" EntityType="PhysioWebModel.Question" />
+          <EntitySet Name="QuestionSets" EntityType="PhysioWebModel.QuestionSet" />
+          <EntitySet Name="QuestionSetQuestions" EntityType="PhysioWebModel.QuestionSetQuestion" />
+          <EntitySet Name="QuestionTypes" EntityType="PhysioWebModel.QuestionType" />
+          <AssociationSet Name="FK_Patient_GenderType" Association="PhysioWebModel.FK_Patient_GenderType">
+            <End Role="GenderType" EntitySet="GenderTypes" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientAnswer_Patient" Association="PhysioWebModel.FK_PatientAnswer_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientAnswer" EntitySet="PatientAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientQuestionnaire_Patient" Association="PhysioWebModel.FK_PatientQuestionnaire_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientQuestionnaire" EntitySet="PatientQuestionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientAnswer_PatientQuestionnaire" Association="PhysioWebModel.FK_PatientAnswer_PatientQuestionnaire">
+            <End Role="PatientQuestionnaire" EntitySet="PatientQuestionnaires" />
+            <End Role="PatientAnswer" EntitySet="PatientAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientAnswer_Question" Association="PhysioWebModel.FK_PatientAnswer_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="PatientAnswer" EntitySet="PatientAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientQuestionnaire_QuestionSet" Association="PhysioWebModel.FK_PatientQuestionnaire_QuestionSet">
+            <End Role="QuestionSet" EntitySet="QuestionSets" />
+            <End Role="PatientQuestionnaire" EntitySet="PatientQuestionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_QuestionType" Association="PhysioWebModel.FK_Question_QuestionType">
+            <End Role="QuestionType" EntitySet="QuestionTypes" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionSetQuestion_Question" Association="PhysioWebModel.FK_QuestionSetQuestion_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="QuestionSetQuestion" EntitySet="QuestionSetQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionSetQuestion_QuestionSet" Association="PhysioWebModel.FK_QuestionSetQuestion_QuestionSet">
+            <End Role="QuestionSet" EntitySet="QuestionSets" />
+            <End Role="QuestionSetQuestion" EntitySet="QuestionSetQuestions" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(PhysioWebModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(PhysioWebModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="uspChartPivot">
+          <Parameter Name="PatientId" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="vwPatientQuestionnaires" EntityType="PhysioWebModel.vwPatientQuestionnaire" />
+          <EntitySet Name="vwPatientChartDatas" EntityType="PhysioWebModel.vwPatientChartData" />
+          </EntityContainer>
+        <EntityType Name="GenderType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patients" Relationship="PhysioWebModel.FK_Patient_GenderType" FromRole="GenderType" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DoB" Type="DateTime" Precision="0" />
+          <Property Name="GenderTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GenderType" Relationship="PhysioWebModel.FK_Patient_GenderType" FromRole="Patient" ToRole="GenderType" />
+          <NavigationProperty Name="PatientAnswers" Relationship="PhysioWebModel.FK_PatientAnswer_Patient" FromRole="Patient" ToRole="PatientAnswer" />
+          <NavigationProperty Name="PatientQuestionnaires" Relationship="PhysioWebModel.FK_PatientQuestionnaire_Patient" FromRole="Patient" ToRole="PatientQuestionnaire" />
+        </EntityType>
+        <EntityType Name="PatientAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionnaireId" Type="Int32" Nullable="false" />
+          <Property Name="Answer" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="PhysioWebModel.FK_PatientAnswer_Patient" FromRole="PatientAnswer" ToRole="Patient" />
+          <NavigationProperty Name="PatientQuestionnaire" Relationship="PhysioWebModel.FK_PatientAnswer_PatientQuestionnaire" FromRole="PatientAnswer" ToRole="PatientQuestionnaire" />
+          <NavigationProperty Name="Question" Relationship="PhysioWebModel.FK_PatientAnswer_Question" FromRole="PatientAnswer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="PatientQuestionnaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionSetId" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionnaireDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Patient" Relationship="PhysioWebModel.FK_PatientQuestionnaire_Patient" FromRole="PatientQuestionnaire" ToRole="Patient" />
+          <NavigationProperty Name="PatientAnswers" Relationship="PhysioWebModel.FK_PatientAnswer_PatientQuestionnaire" FromRole="PatientQuestionnaire" ToRole="PatientAnswer" />
+          <NavigationProperty Name="QuestionSet" Relationship="PhysioWebModel.FK_PatientQuestionnaire_QuestionSet" FromRole="PatientQuestionnaire" ToRole="QuestionSet" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="QuestionTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionTypeId" Type="Int32" />
+          <Property Name="QuestionAbbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionHint" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UIcaption" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PatientAnswers" Relationship="PhysioWebModel.FK_PatientAnswer_Question" FromRole="Question" ToRole="PatientAnswer" />
+          <NavigationProperty Name="QuestionType" Relationship="PhysioWebModel.FK_Question_QuestionType" FromRole="Question" ToRole="QuestionType" />
+          <NavigationProperty Name="QuestionSetQuestions" Relationship="PhysioWebModel.FK_QuestionSetQuestion_Question" FromRole="Question" ToRole="QuestionSetQuestion" />
+        </EntityType>
+        <EntityType Name="QuestionSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="QuestionSetName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PatientQuestionnaires" Relationship="PhysioWebModel.FK_PatientQuestionnaire_QuestionSet" FromRole="QuestionSet" ToRole="PatientQuestionnaire" />
+          <NavigationProperty Name="QuestionSetQuestions" Relationship="PhysioWebModel.FK_QuestionSetQuestion_QuestionSet" FromRole="QuestionSet" ToRole="QuestionSetQuestion" />
+        </EntityType>
+        <EntityType Name="QuestionSetQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionSetId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="PhysioWebModel.FK_QuestionSetQuestion_Question" FromRole="QuestionSetQuestion" ToRole="Question" />
+          <NavigationProperty Name="QuestionSet" Relationship="PhysioWebModel.FK_QuestionSetQuestion_QuestionSet" FromRole="QuestionSetQuestion" ToRole="QuestionSet" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Questions" Relationship="PhysioWebModel.FK_Question_QuestionType" FromRole="QuestionType" ToRole="Question" />
+        </EntityType>
+        <Association Name="FK_Patient_GenderType">
+          <End Type="PhysioWebModel.GenderType" Role="GenderType" Multiplicity="1" />
+          <End Type="PhysioWebModel.Patient" Role="Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="GenderTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientAnswer_Patient">
+          <End Type="PhysioWebModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="PhysioWebModel.PatientAnswer" Role="PatientAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientAnswer">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientQuestionnaire_Patient">
+          <End Type="PhysioWebModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="PhysioWebModel.PatientQuestionnaire" Role="PatientQuestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientQuestionnaire">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientAnswer_PatientQuestionnaire">
+          <End Type="PhysioWebModel.PatientQuestionnaire" Role="PatientQuestionnaire" Multiplicity="1" />
+          <End Type="PhysioWebModel.PatientAnswer" Role="PatientAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientQuestionnaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientAnswer">
+              <PropertyRef Name="QuestionnaireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientAnswer_Question">
+          <End Type="PhysioWebModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="PhysioWebModel.PatientAnswer" Role="PatientAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientAnswer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientQuestionnaire_QuestionSet">
+          <End Type="PhysioWebModel.QuestionSet" Role="QuestionSet" Multiplicity="1" />
+          <End Type="PhysioWebModel.PatientQuestionnaire" Role="PatientQuestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientQuestionnaire">
+              <PropertyRef Name="QuestionSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_QuestionType">
+          <End Type="PhysioWebModel.QuestionType" Role="QuestionType" Multiplicity="0..1" />
+          <End Type="PhysioWebModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuestionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionSetQuestion_Question">
+          <End Type="PhysioWebModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="PhysioWebModel.QuestionSetQuestion" Role="QuestionSetQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionSetQuestion">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionSetQuestion_QuestionSet">
+          <End Type="PhysioWebModel.QuestionSet" Role="QuestionSet" Multiplicity="1" />
+          <End Type="PhysioWebModel.QuestionSetQuestion" Role="QuestionSetQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionSetQuestion">
+              <PropertyRef Name="QuestionSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="vwPatientQuestionnaire">
+          <Key>
+            <PropertyRef Name="PatientId" />
+            <PropertyRef Name="QuestionSetId" />
+            <PropertyRef Name="PatientQuestionnaireId" />
+            <PropertyRef Name="QuestionnaireDate" />
+            <PropertyRef Name="QuestionSetName" />
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="QuestionTitle" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="PatientName" Type="String" MaxLength="102" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionSetId" Type="Int32" Nullable="false" />
+          <Property Name="PatientQuestionnaireId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionnaireDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="QuestionSetName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionAbbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionHint" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UIcaption" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwPatientChartData">
+          <Key>
+            <PropertyRef Name="Answer" />
+            <PropertyRef Name="PatientId" />
+            <PropertyRef Name="PatientQuestionnaireId" />
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="QuestionnaireDate" />
+          </Key>
+          <Property Name="QuestionAbbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="PatientQuestionnaireId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionnaireDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PhysioWebModelStoreContainer" CdmEntityContainer="PhysioWebEntities">
+          <FunctionImportMapping FunctionImportName="uspTempInsertPatient" FunctionName="PhysioWebModel.Store.uspTempInsertPatient" />
+          <EntitySetMapping Name="GenderTypes">
+            <EntityTypeMapping TypeName="PhysioWebModel.GenderType">
+              <MappingFragment StoreEntitySet="GenderType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="PhysioWebModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="GenderTypeId" ColumnName="GenderTypeId" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientAnswers">
+            <EntityTypeMapping TypeName="PhysioWebModel.PatientAnswer">
+              <MappingFragment StoreEntitySet="PatientAnswer">
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="QuestionnaireId" ColumnName="QuestionnaireId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientQuestionnaires">
+            <EntityTypeMapping TypeName="PhysioWebModel.PatientQuestionnaire">
+              <MappingFragment StoreEntitySet="PatientQuestionnaire">
+                <ScalarProperty Name="QuestionnaireDate" ColumnName="QuestionnaireDate" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="QuestionSetId" ColumnName="QuestionSetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="PhysioWebModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="UIcaption" ColumnName="UIcaption" />
+                <ScalarProperty Name="QuestionHint" ColumnName="QuestionHint" />
+                <ScalarProperty Name="QuestionAbbreviation" ColumnName="QuestionAbbreviation" />
+                <ScalarProperty Name="QuestionTypeId" ColumnName="QuestionTypeId" />
+                <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionSets">
+            <EntityTypeMapping TypeName="PhysioWebModel.QuestionSet">
+              <MappingFragment StoreEntitySet="QuestionSet">
+                <ScalarProperty Name="QuestionSetName" ColumnName="QuestionSetName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionSetQuestions">
+            <EntityTypeMapping TypeName="PhysioWebModel.QuestionSetQuestion">
+              <MappingFragment StoreEntitySet="QuestionSetQuestion">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="QuestionSetId" ColumnName="QuestionSetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionTypes">
+            <EntityTypeMapping TypeName="PhysioWebModel.QuestionType">
+              <MappingFragment StoreEntitySet="QuestionType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="PhysioWebModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="PhysioWebModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="PhysioWebModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="PhysioWebModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhysioWebModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="PhysioWebModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhysioWebModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="PhysioWebModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PhysioWebModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="uspChartPivot" FunctionName="PhysioWebModel.Store.uspChartPivot" />
+          <EntitySetMapping Name="vwPatientQuestionnaires">
+            <EntityTypeMapping TypeName="PhysioWebModel.vwPatientQuestionnaire">
+              <MappingFragment StoreEntitySet="vwPatientQuestionnaire">
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UIcaption" ColumnName="UIcaption" />
+                <ScalarProperty Name="QuestionHint" ColumnName="QuestionHint" />
+                <ScalarProperty Name="QuestionAbbreviation" ColumnName="QuestionAbbreviation" />
+                <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="QuestionSetName" ColumnName="QuestionSetName" />
+                <ScalarProperty Name="QuestionnaireDate" ColumnName="QuestionnaireDate" />
+                <ScalarProperty Name="PatientQuestionnaireId" ColumnName="PatientQuestionnaireId" />
+                <ScalarProperty Name="QuestionSetId" ColumnName="QuestionSetId" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPatientChartDatas">
+            <EntityTypeMapping TypeName="PhysioWebModel.vwPatientChartData">
+              <MappingFragment StoreEntitySet="vwPatientChartData">
+                <ScalarProperty Name="QuestionnaireDate" ColumnName="QuestionnaireDate" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="PatientQuestionnaireId" ColumnName="PatientQuestionnaireId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="QuestionAbbreviation" ColumnName="QuestionAbbreviation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

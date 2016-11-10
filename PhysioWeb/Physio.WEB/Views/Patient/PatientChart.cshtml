@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "PatientChart";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Each question of the questionnaire is graphed over time below. </h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="morris-line-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/bundles/morrisStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/morris")
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            var params = '&patientId=1&QuestionnaireId=1';
+
+            $.ajax({
+                url: GetPatientChartDataUrl,
+                data: params,
+                cache: false,
+                type: 'GET',
+                contentType: "application/json;charset=utf-8",
+                dataType: 'json',
+                success: function (data) {
+
+                    var stop = 1;
+
+                    //var line_data = [{ date: '2016-02-05', Pain: 10, Work: 2, Family: 4 },
+                    //            { date: '2016-02-12', Pain: 8, Work: 5, Family: 4 },
+                    //            { date: '2016-02-18', Pain: 7, Work: 3, Family: 2 },
+                    //            { date: '2016-03-05', Pain: 5, Work: 6, Family: 7 },
+                    //            { date: '2016-04-05', Pain: 4, Work: 6, Family: 7 },
+                    //            { date: '2016-04-12', Pain: 2, Work: 8, Family: 9 }];
+
+                    var new_data = data.list;
+
+                    var line_data = [];
+                    for (var i = 0; i < new_data.length; i++) {
+
+                        var temp = new_data[i];
+                        var temp2 = JSON.parse(temp);
+
+                        line_data.push(temp2);
+                    }
+
+                    //var y_keys = [];
+                    //for (var i = 0; i <= data.y_keys.length; i++) {
+                    //    y_keys.push(JSON.parse(data.y_keys[i]))
+                    //}
+
+
+                    //xkey: data.x_key,
+                    //ykeys: y_keys,
+                    //labels: y_keys,
+
+                    Morris.Line({
+                        element: 'morris-line-chart',
+                        data: line_data,
+                        xkey: 'Date',
+                        ykeys: ['Pain', 'Work', 'Family'],
+                        labels: ['Pain', 'Work', 'Family'],
+                        hideHover: 'auto',
+                        resize: true,
+                        lineColors: ['#54cdb4', '#1a81b3', 'd9ec40'],
+                        parseTime: false
+                    });
+                    
+                }
+            });
+
+        });
+    </script>
+}
