@@ -2090,8 +2090,8 @@ a.DTTT_button:hover:not(.DTTT_disabled) {
   font-size: 11px;
 }
 .ui-jqgrid .form-control {
-  height: 10px;
-  width: auto;
+  /*height: 10px;
+  width: auto;*/
   display: inline;
   padding: 10px 12px;
 }
@@ -2304,9 +2304,11 @@ a.DTTT_button:hover:not(.DTTT_disabled) {
   background: #f3f3f4;
   padding: 10px;
 }
-#nestable2 .dd-handle:hover {
-  /*background: #bbb;*/
-}
+
+/*#nestable2 .dd-handle:hover {
+  background: #bbb;
+}*/
+
 #nestable2 span.label {
   margin-right: 10px;
 }
@@ -3247,7 +3249,7 @@ body.full-height-layout #page-wrapper {
   min-height: auto;
 }
 body.boxed-layout {
-  background: url('patterns/shattered.png');
+  background: url('Content/patterns/shattered.png');
 }
 body.boxed-layout #wrapper {
   background-color: #2f4050;
@@ -3736,7 +3738,7 @@ table.table-mail tr td {
   margin: 0 0 7px;
   padding: 0;
   text-overflow: ellipsis;
-  float: left;
+  /*float: left;*/
 }
 .ibox-title .label {
   float: left;
@@ -6103,14 +6105,15 @@ body.body-small .vote-icon {
  *    </div>
  *
  */
-.sk-spinner-cube-grid {
+/*.sk-spinner-cube-grid {*/
   /*
    * Spinner positions
    * 1 2 3
    * 4 5 6
    * 7 8 9
    */
-}
+/*}*/
+
 .sk-spinner-cube-grid.sk-spinner {
   width: 30px;
   height: 30px;
@@ -6427,7 +6430,7 @@ body.landing-page {
   font-family: 'Open Sans', helvetica, arial, sans-serif;
   background-color: #fff;
 }
-.landing-page {
+/*.landing-page {*/
   /* CUSTOMIZE THE NAVBAR
   -------------------------------------------------- */
   /* Flip around the padding for proper display in narrow viewports */
@@ -6444,7 +6447,7 @@ body.landing-page {
   ------------------------- */
   /* RESPONSIVE CSS
   -------------------------------------------------- */
-}
+/*}*/
 .landing-page span.navy {
   color: #1ab394;
 }
@@ -6905,11 +6908,11 @@ body.landing-page {
   border-color: #1dc5a3;
 }
 @media (min-width: 768px) {
-  .landing-page {
+  /*.landing-page {*/
     /* Navbar positioning foo */
     /* The navbar becomes detached from the top, so we round the corners */
     /* Bump up size of carousel content */
-  }
+  /*}*/
   .landing-page .navbar-wrapper {
     margin-top: 20px;
   }
@@ -7012,9 +7015,9 @@ body.landing-page {
     border: none;
   }
 }
-body.rtls {
-  /* Theme config */
-}
+/*body.rtls {
+   Theme config 
+}*/
 body.rtls #page-wrapper {
   margin: 0 220px 0 0;
 }
@@ -8025,7 +8028,7 @@ body.md-skin {
   }
   .navbar-header {
     display: inline;
-    float: left;
+    /*float: left;*/
   }
   .sidebard-panel {
     z-index: 2;

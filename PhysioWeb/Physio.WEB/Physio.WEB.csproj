@@ -185,7 +185,7 @@
     <Compile Include="Helpers\HTMLHelperExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChartModel.cs" />
-    <Compile Include="Models\Class1.cs" />
+    <Compile Include="Models\PropertyBagModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PatientChartModel.cs" />
