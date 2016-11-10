@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physio.DAL", "Physio.DAL\Physio.DAL.csproj", "{64828DF6-C054-4F7E-B627-C8E2863529B2}"
 EndProject
@@ -9,27 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mtosh.Common", "mtosh.Commo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physio.WEB", "Physio.WEB\Physio.WEB.csproj", "{5455C358-7215-4FE7-B11C-0237F4D2AB11}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Physio.DB", "Physio.DB\Physio.DB.sqlproj", "{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}"
-EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://davidbtosh.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = Physio.DAL\\Physio.DAL.csproj
-		SccProjectName0 = Physio.DAL
-		SccLocalPath0 = Physio.DAL
-		SccProjectUniqueName1 = mtosh.Common\\mtosh.Common.csproj
-		SccProjectName1 = mtosh.Common
-		SccLocalPath1 = mtosh.Common
-		SccProjectUniqueName2 = Physio.DB\\Physio.DB.sqlproj
-		SccProjectName2 = Physio.DB
-		SccLocalPath2 = Physio.DB
-		SccProjectUniqueName3 = Physio.WEB\\Physio.WEB.csproj
-		SccProjectName3 = Physio.WEB
-		SccLocalPath3 = Physio.WEB
-		SccLocalPath4 = .
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -54,15 +34,6 @@ Global
 		{5455C358-7215-4FE7-B11C-0237F4D2AB11}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5455C358-7215-4FE7-B11C-0237F4D2AB11}.Work|Any CPU.ActiveCfg = Work|Any CPU
 		{5455C358-7215-4FE7-B11C-0237F4D2AB11}.Work|Any CPU.Build.0 = Work|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Work|Any CPU.ActiveCfg = Work|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Work|Any CPU.Build.0 = Work|Any CPU
-		{D8DB45A1-1A10-4FBC-B26A-F936C3F1E4BD}.Work|Any CPU.Deploy.0 = Work|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
